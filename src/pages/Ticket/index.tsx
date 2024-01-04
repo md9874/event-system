@@ -44,7 +44,7 @@ function Ticket(): ReactElement {
           flexDirection: "column",
         }}
       >
-        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/holiday-requests")} sx={{ marginRight: "auto" }}>
+        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/")} sx={{ marginRight: "auto" }}>
           Wróć
         </Button>
         {ticket && <TicketMainData ticket={ticket} />}

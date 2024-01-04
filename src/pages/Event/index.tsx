@@ -45,20 +45,10 @@ function Event(): ReactElement {
           flexDirection: "column",
         }}
       >
-        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/holiday-requests")} sx={{ marginRight: "auto" }}>
+        <Button startIcon={<ArrowBackIcon />} onClick={() => navigate("/")} sx={{ marginRight: "auto" }}>
           Wróć
         </Button>
         {event && <EventMainData event={event} />}
-        {/*(appContext.state.userData?.userType === "supervisor" || appContext.state.userData?.role === "hr") && (
-          <ButtonGroup variant="contained" sx={{ marginTop: "auto", width: "min-content" }}>
-            <Button startIcon={<CancelIcon />} disabled={event?.isClosed} onClick={() => acceptRequest()}>
-              Odrzuć
-            </Button>
-            <Button startIcon={<CheckCircleIcon />} disabled={event?.isClosed} onClick={() => rejectRequest()}>
-              Akceptuj
-            </Button>
-          </ButtonGroup>
-        )*/}
         {appContext.state.userData?.userType === "organizer" && <EventMembers />}
       </Paper>
     </PageLoader>

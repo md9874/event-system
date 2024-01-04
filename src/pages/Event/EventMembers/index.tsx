@@ -5,7 +5,7 @@ import { ReactElement, useState } from "react";
 import { useParams } from "react-router";
 import { EventMemberInterface } from "types";
 
-interface EventMembersInterface {}
+interface EventMembersInterface { }
 
 function EventMembers(props: EventMembersInterface): ReactElement {
   const [eventMembers, setEventMembers] = useState<EventMemberInterface[]>([]);
@@ -24,8 +24,8 @@ function EventMembers(props: EventMembersInterface): ReactElement {
       ]}
     >
       <CustomDataTable
-        headers={["Nazwa", "Organizator", "Rozpoczęcie", "Zakończenie"]}
-        objectKeys={["name", "companyName", "dateFrom", "dateTo"]}
+        headers={["Nazwa", "Organizacja", "Data rejestracji", "Data zakupu biletu"]}
+        objectKeys={["name", "companyName", "registrationDate", "ticketBuyingDate"]}
         dataArray={eventMembers}
         actions={[]}
         sx={{ marginTop: "20px" }}
