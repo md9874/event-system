@@ -14,7 +14,6 @@ module.exports = (env, options) => ({
       types: path.resolve(__dirname, "src/types"),
       utils: path.resolve(__dirname, "src/utils"),
       hooks: path.resolve(__dirname, "src/hooks"),
-      appConfig: path.resolve(__dirname, "src/appConfig"),
     },
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },

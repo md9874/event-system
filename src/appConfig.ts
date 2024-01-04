@@ -1,3 +1,2 @@
 //PRODUCTION PROXY
-export const proxy: string = "https://devrt.biztech.pl/api";
-export const encryptStorageKey: string = "AAABBB";
+export const proxy: string = "https://localhost:7165";

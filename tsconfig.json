@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,48 +17,19 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "api": [
-        "api"
-      ],
-      "context": [
-        "context"
-      ],
-      "components": [
-        "components"
-      ],
-      "icons": [
-        "icons"
-      ],
-      "images": [
-        "images"
-      ],
-      "layout": [
-        "layout"
-      ],
-      "pages": [
-        "pages"
-      ],
-      "reducers": [
-        "reducers"
-      ],
-      "router": [
-        "router"
-      ],
-      "styles": [
-        "styles"
-      ],
-      "types": [
-        "types"
-      ],
-      "utils": [
-        "utils"
-      ],
-      "hooks": [
-        "hooks"
-      ],
-      "appConfig": [
-        "appConfig"
-      ]
+      "api": ["api"],
+      "context": ["context"],
+      "components": ["components"],
+      "icons": ["icons"],
+      "images": ["images"],
+      "layout": ["layout"],
+      "pages": ["pages"],
+      "reducers": ["reducers"],
+      "router": ["router"],
+      "styles": ["styles"],
+      "types": ["types"],
+      "utils": ["utils"],
+      "hooks": ["hooks"]
     }
   }
 }

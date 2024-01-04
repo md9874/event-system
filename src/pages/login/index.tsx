@@ -1,28 +1,23 @@
-import { Box, Button, Typography } from "@mui/material";
-import { encryptStorageKey } from "appConfig";
-import { LoadingBackdrop } from "components";
+import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { LoginResponseInterface, login } from "api";
 import { AppContext } from "context";
-import { EncryptStorage } from "encrypt-storage";
-import { ReactElement, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import LoginTextField from "./LoginTextField";
+import { KeyboardEvent, useContext, useState } from "react";
+import { useNavigate } from "react-router";
+import { proxy } from "../../appConfig";
 
-
-function LoginField(): ReactElement {
+function Login() {
   const [userLogin, setUserLogin] = useState<string>("");
-  const [userPassword, setUserPassword] = useState<string>("");
   const [userLoginError, setUserLoginError] = useState<boolean>(false);
+  const [userPassword, setUserPassword] = useState<string>("");
   const [userPasswordError, setUserPasswordError] = useState<boolean>(false);
-
+  const [loginError, setLoginError] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [isLoginError, setLoginError] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const appCtx = useContext(AppContext);
 
   async function handleLogin() {
-    const encryptStorage = new EncryptStorage(encryptStorageKey);
-
     setLoading(true);
     let checking: boolean = true;
     if (userLogin === "") {
@@ -38,31 +33,50 @@ function LoginField(): ReactElement {
       setUserPasswordError(false);
     }
     if (checking) {
+      let response = await login({ login: userLogin, password: userPassword });
+      if (!response.ok) {
+        setLoginError(true);
+      } else {
+        setLoginError(false);
+        let resolved: LoginResponseInterface = await response.json();
+        appCtx.dispatch({ type: "SET_USER_DATA", userData: resolved });
+        navigate("/");
+      }
     }
     setLoading(false);
   }
 
-
-  useEffect(() => {
-    appCtx.dispatch({ type: "REMOVE_USER_DATA" });
-  }, []);
-
   return (
-    <>
-      <Box
+    <Box
+      sx={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Paper
         sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gridTemplateRows: "repeat(9, 1fr)",
-          width: "480px",
-          height: "125%",
-          background: "#a3a3a3",
+          width: "min-content",
+          height: "min-content",
+          padding: "20px",
         }}
       >
-        <Box sx={{ gridRow: "2", gridColumn: "2/5", textAlign: "center" }}>
-          <Typography sx={{ color: "#FFF", fontSize: "1.8em", fontWeight: "bold", letterSpacing: "0px" }}>Logowanie</Typography>
-        </Box>
-        <Box sx={{ gridRow: "4/6", gridColumn: "2/5", display: "flex", flexDirection: "column", rowGap: "19px", position: "relative" }}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "20px",
+          }}
+        >
+          <Typography sx={{ fontSize: "1.8em", fontWeight: "bold" }}>Logowanie</Typography>
           <LoginTextField
             type="text"
             value={userLogin}
@@ -83,58 +97,30 @@ function LoginField(): ReactElement {
             label="Hasło"
             size="small"
           />
-          <Box sx={{ display: "flex", justifyContent: "start" }}>
-            <Button
-              onClick={() => {
-                navigate("/forgot-password");
-              }}
-              sx={{
-                color: "#fff",
-                fontSize: "0.75em",
-                fontWeight: "bold",
-                width: "max-content",
-                position: "relative",
-                textTransform: "none",
-                top: "-20px",
-                "&:hover": { background: "inherit" },
-              }}
-            >
-              Nie pamiętasz hasła?
-            </Button>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            gridRow: "8",
-            gridColumn: "2/5",
-          }}
-        >
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleLogin();
-            }}
-          >
+          {loginError && <Typography sx={{ color: "#d32f2f" }}>Błędne dane logowania</Typography>}
+          <Button type="submit" variant="contained">
             Zaloguj się
           </Button>
-        </Box>
-      </Box>
-      <Box sx={{ width: "30%", padding: "0px 1vw", color: "#E80412" }}>
-        {isLoginError && (
-          <Typography
-            sx={{
-              fontSize: "inherit",
-              fontWeight: "bold",
-              display: "inline",
-            }}
-          >
-            {"Nieprawidłowy login lub hasło"}
-          </Typography>
-        )}
-      </Box>
-      <LoadingBackdrop open={isLoading} />
-    </>
+        </form>
+      </Paper>
+      <Button
+        onClick={() => {
+          async function aaa() {
+            let serverResponse = await fetch(`${proxy}/TokenTest/TestCoockie`, {
+              method: "POST",
+              //headers: {},
+              credentials: "include",
+            });
+            console.log("serverResponse-test", serverResponse);
+          }
+          aaa();
+        }}
+        variant="contained"
+      >
+        Test
+      </Button>
+    </Box>
   );
 }
 
-export default LoginField;
+export default Login;

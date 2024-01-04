@@ -1,17 +1,6 @@
-import { Context, createContext, Dispatch, ReactElement, useReducer } from "react";
-import { authReducer, infoReducer, languageReducer, routerReducer, userReducer } from "reducers";
-import {
-  AuthType,
-  InfoDialogInterface,
-  LanguageType,
-  RouterType,
-  SetAuthType,
-  SetInfoDialogType,
-  SetLanguageType,
-  SetRouterType,
-  SetUserDetailsType,
-  UserDetailsInterface,
-} from "types";
+import { Context, Dispatch, ReactElement, createContext, useReducer } from "react";
+import { infoReducer, userReducer } from "reducers";
+import { InfoDialogInterface, SetInfoDialogType, SetUserType, UserInterface } from "types";
 
 const initialState: AppContextInitialStateInterface = {
   userData: null,
@@ -19,20 +8,14 @@ const initialState: AppContextInitialStateInterface = {
     open: false,
     content: "",
   },
-  language: "pl",
-  router: undefined,
-  auth: undefined,
 };
 
 interface AppContextInitialStateInterface {
-  userData: UserDetailsInterface | null;
+  userData: UserInterface | null;
   infoData: InfoDialogInterface;
-  language: LanguageType;
-  router: RouterType;
-  auth: AuthType;
 }
 
-type AppContextActionsType = SetUserDetailsType | SetInfoDialogType | SetLanguageType | SetRouterType | SetAuthType;
+type AppContextActionsType = SetUserType | SetInfoDialogType;
 
 interface AppContextInterface {
   state: AppContextInitialStateInterface;
@@ -44,12 +27,9 @@ export const AppContext: Context<AppContextInterface> = createContext<AppContext
   dispatch: () => null,
 });
 
-export const appReducer = ({ userData, infoData, router, language, auth }: AppContextInitialStateInterface, action: AppContextActionsType) => ({
-  userData: userReducer(userData, action as SetUserDetailsType),
+export const appReducer = ({ userData, infoData }: AppContextInitialStateInterface, action: SetUserType | SetInfoDialogType) => ({
+  userData: userReducer(userData, action as SetUserType),
   infoData: infoReducer(infoData, action as SetInfoDialogType),
-  language: languageReducer(language, action as SetLanguageType),
-  router: routerReducer(router, action as SetRouterType),
-  auth: authReducer(auth, action as SetAuthType),
 });
 
 function AppContextProvider({ children }: { children: ReactElement }) {

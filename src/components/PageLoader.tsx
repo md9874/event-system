@@ -1,6 +1,8 @@
 import { LoadingBackdrop } from "components";
 import { useFetchData } from "hooks";
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export interface FetchApiInterface<RequestData, ResponseData, StateType> {
   fetchApi: (requestData: RequestData) => Promise<Response>;
@@ -20,6 +22,9 @@ interface PageLoaderInterface {
 function PageLoader(props: PageLoaderInterface): JSX.Element {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [isDemo, setDemo] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const fetchDataHook = useFetchData(
     props.apis.map((apiData) => apiData.fetchApi),
@@ -36,6 +41,16 @@ function PageLoader(props: PageLoaderInterface): JSX.Element {
           let currentSetState = api.state[1];
           let currentMapper = api.mapper;
           if (fetchDatas[apiIndex].data === null) {
+            if (Array.isArray(currentState)) {
+              currentSetState([]);
+            } else {
+              currentSetState(null);
+            }
+            if (api.onNotFound) {
+              api.onNotFound();
+            }
+          } else if (fetchDatas[apiIndex].data === "status581") {
+            setDemo(true);
             if (Array.isArray(currentState)) {
               currentSetState([]);
             } else {
@@ -77,7 +92,22 @@ function PageLoader(props: PageLoaderInterface): JSX.Element {
   }, []);
 
   if (props.isLoading || isLoading) {
-    return <LoadingBackdrop open={isLoading} />;
+    return <LoadingBackdrop />;
+  } else if (isDemo) {
+    return (
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <Typography>Wersja demo. Funkcja niedostępna.</Typography>
+        <Button
+          variant="contained"
+          onClick={() => {
+            navigate(-1);
+          }}
+          sx={{ marginTop: "20px" }}
+        >
+          Wróć
+        </Button>
+      </Box>
+    );
   } else if (error) {
     return <div>ERROR!!!</div>;
   } else {

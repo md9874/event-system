@@ -1,14 +1,10 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement } from "react";
 
-interface LoadingBackdropInterface {
-  open: boolean;
-}
-
-function LoadingBackdrop(props: LoadingBackdropInterface): ReactElement {
+function LoadingBackdrop(): ReactElement {
   return (
-    <Backdrop sx={{ color: "#fff", zIndex: 5000 }} open={props.open}>
-      <CircularProgress color="inherit" />
+    <Backdrop open={true} sx={{ zIndex: 1000, background: "#FFF" }}>
+      <CircularProgress />
     </Backdrop>
   );
 }

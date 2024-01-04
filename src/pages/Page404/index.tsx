@@ -1,23 +1,20 @@
+import { LoadingBackdrop } from "components";
 import { AppContext } from "context";
-import { ReactElement, useContext } from "react";
+import { useEncryptLocalStorage } from "hooks";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Login404 from "./login";
 
-function Page404(): ReactElement {
-  const appCtx = useContext(AppContext);
+function Page404() {
   const navigate = useNavigate();
 
-  if (!appCtx.state.userData) {
-    return <Login404 />;
-  } else {
-    return (
-      <div
-        onLoad={() => {
-          navigate("/");
-        }}
-      ></div>
-    );
-  }
+  const encryptLocalStorage = useEncryptLocalStorage();
+
+  useEffect(() => {
+    encryptLocalStorage.set("tmppn", document.location.pathname);
+    navigate("/");
+  }, []);
+
+  return <LoadingBackdrop />;
 }
 
 export default Page404;

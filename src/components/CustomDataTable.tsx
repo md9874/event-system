@@ -1,7 +1,8 @@
 import { Box, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Tooltip } from "@mui/material";
 import { SxProps, Theme } from "@mui/material/styles";
 import { ReactElement, useState } from "react";
-import { showDateTime, translateBoolean } from "utils";
+import { showDateTime } from "utils";
+import translateBoolean from "utils/translateBoolean";
 
 type Order = "asc" | "desc";
 
@@ -10,9 +11,9 @@ function cellValue(data: any): string | number {
     return data;
   } else if (typeof data === "boolean") {
     return translateBoolean(data, "pl");
-  }
-  else if (data instanceof Date && !isNaN(data.valueOf())) return showDateTime(data);
-  else return "wrong-type";
+  } else if (!data) {
+    return "";
+  } else return showDateTime(data);
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {

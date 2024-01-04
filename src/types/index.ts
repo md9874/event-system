@@ -1,12 +1,9 @@
-export type { default as ApiRequestInterface } from "./ApiRequestInterface";
-export * from "./AuthType";
-export type { default as AuthType } from "./AuthType";
+export type { default as EventInterface } from "./EventInterface";
 export * from "./InfoDialogInterface";
 export type { default as InfoDialogInterface } from "./InfoDialogInterface";
-export * from "./LanguageType";
-export type { default as LanguageType } from "./LanguageType";
-export * from "./UserDetailsInterface";
-export type { default as UserDetailsInterface } from "./UserDetailsInterface";
-export * from "./RouterType";
-export type { default as RouterType } from "./RouterType";
-
+export type { default as MessageInterface } from "./MessageInterface";
+export type { default as TicketInterface } from "./TicketInterface";
+export * from "./UserInterface";
+export type { default as UserInterface } from "./UserInterface";
+export type { default as UserType } from "./UserType";
+export type { default as EventMemberInterface } from "./EventMemberInterface";

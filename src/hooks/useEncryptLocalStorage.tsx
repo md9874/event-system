@@ -1,8 +1,7 @@
 import { EncryptStorage } from "encrypt-storage";
-import { encryptStorageKey } from "appConfig";
 
 function useEncryptLocalStorage() {
-  const encryptStorage = new EncryptStorage(encryptStorageKey);
+  const encryptStorage = new EncryptStorage("aaaaaaaaaa");
 
   function encryptLocalStorage(name: string, value: string) {
     encryptStorage.setItem(name, value);

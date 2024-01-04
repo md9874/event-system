@@ -1,6 +1,6 @@
-export { default as checkEmailIsCorrect } from "./checkEmailIsCorrect";
-export { default as checkPhoneIsCorrect } from "./checkPhoneIsCorrect";
-export { default as roundDecimal } from "./roundDecimal";
+export { default as generateDayName } from "./generateDayName";
+export { default as generateMonthName } from "./generateMonthName";
+export { default as generateShortMonthName } from "./generateShortMonthName";
 export { default as showDate } from "./showDate";
-export { default as translateBoolean } from "./translateBoolean";
 export { default as showDateTime } from "./showDateTime";
+export { default as translateBoolean } from "./translateBoolean";
