@@ -28,7 +28,7 @@ function MyTicketsTab(): JSX.Element {
       <Box display={{ display: "flex", flexDirection: "column" }}>
         <CustomDataTable
           headers={["Numer", "Data kupna", "Wydarzenie", "Organizator"]}
-          objectKeys={["number", "dateOfBuy", "eventName", "compnayName"]}
+          objectKeys={["number", "dateOfBuy", "eventName", "companyName"]}
           dataArray={tickets}
           actions={[
             {
