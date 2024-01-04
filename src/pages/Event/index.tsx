@@ -1,24 +1,20 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Button, Paper } from "@mui/material";
 import {
-  GetEventMembersRequestInterface,
-  GetEventMembersResponseInterface,
   GetEventRequestInterface,
   GetEventResponseInterface,
-  getEvent,
-  getEventMembers,
+  getEvent
 } from "api";
-import { CustomDataTable, FetchApiInterface, PageLoader } from "components";
+import { FetchApiInterface, PageLoader } from "components";
 import { AppContext } from "context";
 import { getEventResponseInterfaceToEventInterface } from "mappers";
 import { ReactElement, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { EventInterface, EventMemberInterface } from "types";
+import { EventInterface } from "types";
 import EventMainData from "./EventMainData";
-import getEventMembersResponseInterfaceToEventMemberInterface from "mappers/getEventMembersResponseInterfaceToEventMemberInterface";
 import EventMembers from "./EventMembers";
 
-function HolidayRequest(): ReactElement {
+function Event(): ReactElement {
   const [event, setEvent] = useState<EventInterface | null>(null);
 
   const params = useParams();
@@ -69,4 +65,4 @@ function HolidayRequest(): ReactElement {
   );
 }
 
-export default HolidayRequest;
+export default Event;

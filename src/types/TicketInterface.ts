@@ -4,8 +4,9 @@ interface TicketInterface {
   dateOfBuy: Date;
   eventId: number;
   eventName: string;
+  eventStatus: string;
   companyId: number;
-  compnayName: string;
+  companyName: string;
   userId: number;
 }
 

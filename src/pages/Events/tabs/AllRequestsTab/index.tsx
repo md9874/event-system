@@ -1,5 +1,6 @@
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Box } from "@mui/material";
 import getAllEvents, { GetAllEventsRequestInterface, GetAllEventsResponseInterface } from "api/getAllEvents";
 import { CustomDataTable, FetchApiInterface, PageLoader } from "components";
@@ -8,13 +9,22 @@ import { getAllEventsResponseInterfaceToEventInterface } from "mappers";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { EventInterface } from "types";
+import { registerForTheEvent } from 'api';
 
 function AllRequestsTab(): JSX.Element {
   const [events, setEvents] = useState<EventInterface[]>([]);
-  const [checkedRequest, setCheckedRequest] = useState<EventInterface | undefined>(undefined);
 
   const appContext = useContext(AppContext);
   const navigate = useNavigate();
+
+  async function registerUserForTheEvent(eventId: number) {
+    const response = await registerForTheEvent({ eventId: eventId });
+    if (response.ok) {
+      appContext.dispatch({ type: "SET_INFO_DIALOG", content: "Rejestracja udana!" });
+    } else {
+      appContext.dispatch({ type: "SET_INFO_DIALOG", content: "Wystąpił błąd podczas rejestracji! Sprubuj ponownie." });
+    }
+  }
 
   return (
     <PageLoader
@@ -42,9 +52,17 @@ function AllRequestsTab(): JSX.Element {
               },
             },
             {
+              label: "Zarejestruj",
+              icon: <PersonAddRoundedIcon />,
+              isShown: (element: EventInterface) => element.companyId !== appContext.state.userData?.companyId,
+              onClick: (element: EventInterface) => {
+                registerUserForTheEvent(element.id);
+              },
+            },
+            {
               label: "Kup bilet",
-              icon: <ConfirmationNumberIcon />,
-              isShown: () => true,
+              icon: <ShoppingCartIcon />,
+              isShown: (element: EventInterface) => element.companyId !== appContext.state.userData?.companyId,
               onClick: (element: EventInterface) => {
                 //setCheckedRequest(element);
               },

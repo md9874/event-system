@@ -1,9 +1,13 @@
+import EventStatusType from "./EventStatusType";
+
 interface EventInterface {
   id: number;
-  companyName: string;
   name: string;
+  companyId: number;
+  companyName: string;
   dateFrom: Date;
   dateTo: Date;
+  status: EventStatusType;
 }
 
 export default EventInterface;

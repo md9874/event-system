@@ -30,8 +30,8 @@ async function login(props: LoginRequestInterface): Promise<Response> {
   const dataBase: LoginResponseInterface = {
     id: 1,
     name: "Jan Kowalski",
-    companyId: null,
-    companyName: "",
+    companyId: 1,
+    companyName: "NY Times",
     userType: "organizer",
   };
 

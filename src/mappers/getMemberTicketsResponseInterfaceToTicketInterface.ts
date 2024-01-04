@@ -8,8 +8,9 @@ function getMemberTicketsResponseInterfaceToTicketInterface(element: GetMemberTi
     dateOfBuy: new Date(element.dateOfBuy),
     eventId: element.eventId,
     eventName: element.eventName,
+    eventStatus: element.eventStatus,
     companyId: element.companyId,
-    compnayName: element.compnayName,
+    companyName: element.companyName,
     userId: element.userId,
   };
 }

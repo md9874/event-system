@@ -5,7 +5,7 @@ function getEventMembersResponseInterfaceToEventMemberInterface(element: GetEven
   return {
     id: element.id,
     name: element.name,
-    companyId: 1,
+    companyId: element.companyId,
     companyName: element.companyName,
     registrationDate: new Date(element.registrationDate),
     ticketBuyingDate: new Date(element.ticketBuyingDate),

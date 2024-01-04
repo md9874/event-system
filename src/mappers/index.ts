@@ -2,3 +2,4 @@ export { default as getAllEventsResponseInterfaceToEventInterface } from "./getA
 export { default as getOrganizerEventsResponseInterfaceToEventInterface } from "./getOrganizerEventsResponseInterfaceToEventInterface";
 export { default as getMemberTicketsResponseInterfaceToTicketInterface } from "./getMemberTicketsResponseInterfaceToTicketInterface";
 export { default as getEventResponseInterfaceToEventInterface } from "./getEventResponseInterfaceToEventInterface";
+export { default as getTicketResponseInterfaceToTicketInterface } from "./getTicketResponseInterfaceToTicketInterface";

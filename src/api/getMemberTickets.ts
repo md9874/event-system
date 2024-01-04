@@ -1,4 +1,6 @@
-export interface GetMemberTicketsRequestInterface {}
+import EventStatusType from "../types/EventStatusType";
+
+export interface GetMemberTicketsRequestInterface { }
 
 export interface GetMemberTicketsResponseInterface {
   id: number;
@@ -6,8 +8,9 @@ export interface GetMemberTicketsResponseInterface {
   dateOfBuy: string;
   eventId: number;
   eventName: string;
+  eventStatus: EventStatusType;
   companyId: number;
-  compnayName: string;
+  companyName: string;
   userId: number;
 }
 
@@ -19,8 +22,9 @@ async function getMemberTickets(props: GetMemberTicketsRequestInterface): Promis
       dateOfBuy: "2024-01-04T08:00:00",
       eventId: 1,
       eventName: "Konferencja dziennikarska",
+      eventStatus: "opened",
       companyId: 1,
-      compnayName: "NY Times",
+      companyName: "NY Times",
       userId: 1,
     },
     {
@@ -29,8 +33,9 @@ async function getMemberTickets(props: GetMemberTicketsRequestInterface): Promis
       dateOfBuy: "2024-01-04T08:00:00",
       eventId: 2,
       eventName: "Warsztaty karciane",
+      eventStatus: "opened",
       companyId: 2,
-      compnayName: "Macao Company",
+      companyName: "Macao Company",
       userId: 2,
     },
   ];

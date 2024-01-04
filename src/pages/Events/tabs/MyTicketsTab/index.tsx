@@ -36,7 +36,7 @@ function MyTicketsTab(): JSX.Element {
               icon: <SearchIcon />,
               isShown: () => true,
               onClick: (element: EventInterface) => {
-                //navigate(element.id.toString());
+                navigate(`ticket/${element.id.toString()}`);
               },
             },
           ]}
